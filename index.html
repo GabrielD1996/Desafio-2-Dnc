@@ -10,19 +10,24 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <style>
+        *{
+            font-family: inter;
+        }
+    </style>
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg bg-primary  ">
-        <div class="container-fluid ">
-            <div class="col-sm-10 ">
-                <a class="navbar-brand text-white fs-2 fw-bold" href="#">DncWeather</a>
+    <nav class="navbar navbar-expand-lg bg-primary">
+        <div class="container-fluid">
+            <div class="col-sm">
+                <a class="navbar-brand text-white fs-3 fw-bold" href="#">DncWeather</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
             </div>
-            <div class="collapse navbar-collapse " id="navbarNav">
+            <div class="collapse navbar-collapse d-flex justify-content-end" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
                         <a class="nav-link active text-white fs-6" aria-current="page" href="#">Endereços</a>
@@ -34,8 +39,20 @@
             </div>
         </div>
     </nav>
-
-
+  
+    <div class="container d-flex justify-content-center mt-5"> 
+        <div class="row">
+          <div class="col-md-8 fs-3 fw-bolder mb-3 "> 
+            <p>Descubra Mais com Precisão: <br>
+               Previsões do Tempo e endereços <br>
+               em tempo real.</p>
+          </div>
+          <div class="col-md mx-5">
+            <img src="img/nuvens.svg" width="150px" class="img-fluid " alt="Imagem">
+          </div>
+        </div>
+    </div>
+</body>
 
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
