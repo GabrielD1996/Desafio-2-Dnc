@@ -1,7 +1,7 @@
 function onclickSubmitHandler() {
     getAddressByCep();
     getForecast();  
-  
+    window.scrollTo(0,1000)
 
 }
 async function getAddressByCep() {
