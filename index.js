@@ -1,6 +1,8 @@
 function onclickSubmitHandler() {
     getAddressByCep();
-    getForecast();
+    getForecast();  
+  
+
 }
 async function getAddressByCep() {
     const cep = document.getElementById('cep').value;
@@ -12,7 +14,7 @@ async function getAddressByCep() {
         document.getElementById('bairro').innerHTML = data.bairro;
         document.getElementById('estado').innerHTML = data.localidade + '/' + data.uf;
     } catch (error) {
-        alert("Favor preencher todos os campos! " )
+        alert("Por favor, insira um CEP válido." )
     }
 
 }
@@ -26,7 +28,7 @@ async function getForecast() {
         document.getElementById('returnForecast').innerHTML = 'Previsão de tempo de acordo com a região: ' + data.current.temperature_2m + ' ° C';
 
     } catch (error) {
-        alert("Favor preencher todos os campos! ")
+        alert("Por favor, insira coordenadas de latitude e longitude válidas." )
     }
 
 }
