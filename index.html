@@ -10,81 +10,21 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
-    <style>
-        * {
-            font-family: inter;
-        }
-
-        body {
-            background-color: #F2F2F2;
-        }
-
-        #form {
-            margin-bottom: 200px;
-        }
-        #btn{
-            box-shadow: 0px 4px 2px rgba(159, 197, 248, 0.9);;
-        }
-
-        .separador {
-            display: inline-block;
-            width: 1px;
-            height: 20px;
-            background-color: white;
-        }
-
-        footer {
-            margin-top: 150px;
-        }
-    </style>
-
-    <script>
-        function executarDuasFuncoes(){
-            getAddressByCep();
-            getPrevisao();
-        }
-        async function getAddressByCep() {
-            const cep = document.getElementById('cep').value;
-            try {
-                const response = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
-                const data = await response.json()
-                console.log(data);
-                document.getElementById('rua').innerHTML = data.logradouro;
-                document.getElementById('bairro').innerHTML = data.bairro;
-                document.getElementById('estado').innerHTML = data.localidade + '/' + data.uf;
-            } catch (error) {
-                alert(error.mensage)
-            }
-
-        }
-        async function getPrevisao() {
-            const lat = document.getElementById('lat').value;
-            const long = document.getElementById('long').value;
-            try {
-                const response = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${long}&current=temperature_2m&forecast_days=1`);
-                const data = await response.json()
-                console.log(data);
-                document.getElementById('respostaTemp').innerHTML = 'Previsão de tempo de acordo com a região ' + data.current.temperature_2m +' ° C';
-               
-            } catch (error) {
-                alert(error.mensage)
-            }
-
-        }
-    </script>
+    <link rel="stylesheet" href="style.css">   
+    <script src="index.js"></script>
 </head>
 
 <body>
     <!-- CABEÇALHO -->
-    <nav class="navbar navbar-expand-lg bg-primary">
+    <nav class="navbar navbar-expand-lg bg-primary navBp">
         <div class="container-fluid">
-            <div class="col-sm">
-                <a class="navbar-brand text-white fs-3 fw-bold" href="">DncWeather</a>
+            <div class="col-sm navBp">
+                <a class="navbar-brand text-white fs-3 fw-bold " href="">DncWeather</a>
             </div>
-            <div class="collapse navbar-collapse d-flex justify-content-end" id="navbarNav">
+            <div class=" navbar-collapse d-flex justify-content-end navBp" id="navbarNav">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link active text-white fs-6" aria-current="page" href="#secaoCep">Endereços</a>
+                        <a class="nav-link active text-white fs-6 " aria-current="page" href="#secaoCep">Endereços</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active text-white fs-6" aria-current="page" href="#secaoTemp">Previsão do tempo</a>
@@ -96,13 +36,13 @@
     <!-- CONTEUDO -->
     <div class="container d-flex justify-content-center mt-5">
         <div class="row">
-            <div class="col-md-8 fs-3 fw-bolder mb-3 ">
-                <p>Descubra Mais com Precisão: <br>
+            <div class="col-md-8 fs-3 fw-bolder mb-3 divConteudoBp">
+                <p class="conteundoBp">Descubra Mais com Precisão: <br>
                     Previsões do Tempo e endereços <br>
                     em tempo real.</p>
             </div>
             <div class="col-md mx-5">
-                <img src="img/nuvens.svg" width="150px" class="img-fluid " alt="Imagem">
+                <img src="img/nuvens.svg" width="150px" class="img-fluid imgBp " alt="Imagem">
             </div>
         </div>
     </div>
@@ -131,15 +71,17 @@
                 </div>
                 <div class="mb-3 row">
                     <div class="col-sm">
-                        <input type="text" class="form-control bg-light  border-0" placeholder="Latitude" id="lat">
+                        <input type="text" required class="form-control bg-light  border-0" placeholder="Latitude" id="lat">
                     </div>
                     <div class="col-sm">
-                        <input type="text" class="form-control bg-light  border-0" placeholder="Longitude" id="long">
+                        <input type="text" required class="form-control bg-light  border-0" placeholder="Longitude" id="long">
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary mt-3 mb-4 col-md-12" id="btn" onclick="executarDuasFuncoes()" >
-                    Acessar
-                </button>
+                <div class=" row botaoAcessar">
+                    <button type="submit"  class="btn btn-primary mt-3 mb-4 col-md-12" id="btn" onclick="onclickSubmitHandler()" >
+                        Acessar
+                    </button>
+                </div>
             </form>
         </div>
     </div>
@@ -150,38 +92,38 @@
                 <div class="col-md-8 fs-3 fw-bolder  mb-3 ">
                     <p class="mt-4">Resultado da busca por CEP:</p>
                 </div>
-                <div class="col-md mx-5">
+                <div class="col-md mx-5 mbImg">
                     <img src="img/localizacao.svg" width="100" class="img-fluid " alt="Imagem">
                 </div>
             </div>
         </div>
-        <!-- TABELA CEP -->
+    <!-- TABELA CEP -->
         <div class="container p-2 rounded-top-4 bg-primary">
-            <div class="row lh-lg align-items-start text-white">
-                <div class="col">
-                    Logradouro/nome
+                <div class="row lh-lg align-items-start text-white fsCep-Prev">
+                    <div class="col-4 ">
+                        Logradouro/nome
+                    </div>
+                    <div class="col-4">
+                        Bairro/Distrito
+                    </div>
+                    <div class="col-4">
+                        Localidade/UF
+                    </div>
                 </div>
-                <div class="col">
-                    Bairro/Distrito
-                </div>
-                <div class="col">
-                    Localidade/UF
-                </div>
-            </div>
         </div>
-        <div class="container p-2  rounded-bottom-4 bg-white ">
+        <div class="container p-2  rounded-bottom-4 bg-white fsCep-Prev ">
             <div class="row lh-lg align-items-start  ">
-                <div class="col">
+                <div class="col-4">
                     <div id="rua">
                         <br>
                     </div>
                 </div>
-                <div class="col">
+                <div class="col-4">
                     <div id="bairro">
                         <br>
                     </div>
                 </div>
-                <div class="col">
+                <div class="col-4">
                     <div id="estado">
                         <br>
                     </div>
@@ -196,16 +138,16 @@
                 <div class="col-md-8 fs-3 fw-bolder  mb-3 ">
                     <p class="mt-4">Previsão do tempo na região:</p>
                 </div>
-                <div class="col-md mx-5">
+                <div class="col-md mx-5 mbImg">
                     <img src="img/nuves2.svg" width="130px" class="img-fluid " alt="Imagem">
                 </div>
             </div>
         </div>
         <div class="container p-1  rounded-4 bg-white border border-primary ">
             <div class="row lh-lg align-items-start  ">
-                <div  class="col">
+                <div  class="col fsCep-Prev">
                     
-                    <div id="respostaTemp">
+                    <div id="returnForecast">
                         <br>
                     </div>
                 </div>
@@ -216,14 +158,14 @@
     <!-- RODAPÉ -->
     <footer>
         <div class="hstack bg-primary text-white">
-            <div class="p-2 ms-auto"><a
+            <div class="p-2  ms-auto"><a
                     class="link-light link-offset-2 link-underline-opacity-0 link-underline-opacity-100-hover" target="_blank"
                     href="https://www.escoladnc.com.br/wp-content/uploads/2024/02/TERMOS-GERAIS-E-CONDICOES-DE-USO-Escola-DNC-6_0.pdf">
                     Termos de Uso 
                 </a>
             </div>
             <div class="separador"></div>
-            <div class="p-2"> <a
+            <div class="p-2 footerBp"> <a
                     class="link-light link-offset-2 link-underline-opacity-0 link-underline-opacity-100-hover" target="_blank"
                     href="https://www.escoladnc.com.br/wp-content/uploads/2024/02/TERMOS-GERAIS-E-CONDICOES-DE-USO-Escola-DNC-6_0.pdf">
                     Política de Privacidade
